@@ -2,13 +2,32 @@
 * Author: Kramstyles (USER)
 * Filename: next-ts-tutorial/app/(fetch)/client/page.tsx
 */
+"use client";
+import {useEffect, useState} from "react";
 
-const page = () => {
+const ClientPage = () => {
+    const url = "https://jsonplaceholder.typicode.com/users";
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            console.log("Fetching")
+            const data = await fetch(url);
+            const fetchedUsers = await data.json();
+            setUsers(fetchedUsers);
+            console.log("Finally")
+        }
+        fetchData();
+    }, [])
     return (
         <div>
-            <h1>page</h1>
+            <h1>Client Side Rendering Page</h1>
+            <br/>
+            <ol>
+                {users && users?.map((user: any) => <li key={user.id}><b>{user.username}</b> {user.name}</li>)}
+            </ol>
         </div>
     );
 };
 
-export default page
+export default ClientPage;

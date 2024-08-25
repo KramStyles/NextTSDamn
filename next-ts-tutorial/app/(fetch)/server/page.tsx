@@ -7,15 +7,17 @@ const ServerPage = async () => {
     const url = "https://jsonplaceholder.typicode.com/users";
     const data= await fetch(url, {
         next: {
-            revalidate: 300, // Caches and removes cache after 5 Minutes.
+            // revalidate: 300, // Caches and removes cache after 5 Minutes.
+            tags: ["users"],
         }
     });
     const users =await data.json()
     return (
         <div>
-            <h1>Server Data Fetch</h1>
+            <h1>Server Side Data Fetch Rendering</h1>
+            <br/>
             <ul>
-                {users && users?.map((user) => <li key={user.id}>{user.username}, {user.name}</li>)}
+                {users && users?.map((user: any) => <li key={user.id}><b>{user.username}</b> {user.name}</li>)}
             </ul>
         </div>
     );
