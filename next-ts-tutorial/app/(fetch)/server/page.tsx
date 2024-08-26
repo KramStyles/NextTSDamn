@@ -4,6 +4,7 @@
 */
 
 import type {Metadata} from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Server Side Rendering (SSR)",
@@ -12,13 +13,13 @@ export const metadata: Metadata = {
 
 const ServerPage = async () => {
     const url = "https://jsonplaceholder.typicode.com/users";
-    const data= await fetch(url, {
+    const data = await fetch(url, {
         next: {
             // revalidate: 300, // Caches and removes cache after 5 Minutes.
             tags: ["users"],
         }
     });
-    const users =await data.json()
+    const users = await data.json()
 
     // Get local created api
     const localData = await fetch("http://localhost:3000/api")
@@ -26,10 +27,18 @@ const ServerPage = async () => {
 
     return (
         <div>
-            <h1>Server Side Data Fetch Rendering: ({localResponse.message})</h1>
+            <h1>Server Side Data Fetch Rendering:
+                ({localResponse.message})</h1>
             <br/>
             <ul>
-                {users && users?.map((user: any) => <li key={user.id}><b>{user.username}</b> {user.name}</li>)}
+                {users && users?.map((user: any) =>
+                    <li key={user.id}>
+                        <Link href={`/user/${user.id}`}>
+                            <b>{user.username}</b> {user.name}
+                        </Link>
+                    </li>
+                )
+                }
             </ul>
         </div>
     );

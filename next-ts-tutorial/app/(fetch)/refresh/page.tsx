@@ -6,6 +6,7 @@
 import {revalidateTag} from "next/cache";
 const RefreshPage = () => {
     revalidateTag("users");
+    revalidateTag("user_details");
     return (
         <div>
             <h1>To refresh the 'user' tags and not HIT cache. This is the on-demand revalidation. </h1>
