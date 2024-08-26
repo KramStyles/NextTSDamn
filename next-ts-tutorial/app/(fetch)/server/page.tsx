@@ -3,6 +3,13 @@
 * Filename: server/page.tsx
 */
 
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Server Side Rendering (SSR)",
+    description: "Description for SSR"
+}
+
 const ServerPage = async () => {
     const url = "https://jsonplaceholder.typicode.com/users";
     const data= await fetch(url, {

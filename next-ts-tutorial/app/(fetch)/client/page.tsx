@@ -5,6 +5,14 @@
 "use client";
 import {useEffect, useState} from "react";
 
+// Cant use Metadata here because of use client
+// import type {Metadata} from "next";
+//
+// const metadata: Metadata = {
+//     title: "Client Side Rendering (CSR)",
+//     description: "Client Side Description"
+// }
+
 const ClientPage = () => {
     const url = "https://jsonplaceholder.typicode.com/users";
     const [users, setUsers] = useState([])
