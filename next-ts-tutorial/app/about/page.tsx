@@ -8,19 +8,31 @@ const About = () => {
         <div className="max-w-6xl mx-auto p-3 space-y-7">
             <h1 className="text-2xl font-medium text-amber-600">About</h1>
             <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusamus assumenda cum eius in iure nulla perferendis quia
-                suscipit vero voluptate! Accusantium at deleniti dignissimos,
-                ducimus maiores perspiciatis ratione recusandae reiciendis?
+                Aspernatur commodi harum hic laudantium officia quidem
+                sapiente. A aliquam dignissimos distinctio et nobis omnis?
+                Cumque debitis hic iure rem sunt voluptates!
             </div>
-            <div>A asperiores consequatur culpa cum debitis distinctio et hic
-                id, illum laudantium magnam mollitia numquam provident
-                quisquam quo, rem rerum tempore veritatis vitae voluptatibus?
-                Deserunt eligendi magnam perspiciatis ullam vero.
+            <div>A ab, alias cumque deserunt dicta dignissimos distinctio
+                ducimus ea enim esse id ipsum laboriosam, neque nulla numquam
+                sapiente sed, sequi temporibus ullam vitae. Deleniti iste qui
+                suscipit tempore veniam.
             </div>
-            <div>Assumenda laudantium nemo reiciendis. Accusamus cum cumque
-                illum itaque libero nemo perferendis temporibus unde. Ad
-                architecto blanditiis inventore minima mollitia nulla quam
-                quia quisquam. Debitis dolorum facere similique velit veniam?
+            <div>Aspernatur earum harum necessitatibus quae quisquam
+                repellendus ullam veniam. Aliquam aliquid dicta dolorem
+                eligendi eos fuga id illo maiores modi molestias, nesciunt
+                obcaecati perspiciatis placeat repellat repudiandae suscipit
+                totam ut.
+            </div>
+            <div>Beatae dignissimos dolores esse et fugiat magnam, nesciunt
+                recusandae velit. Animi debitis eligendi id itaque laudantium,
+                minima modi natus neque obcaecati odit, officiis quod rem
+                repellat repellendus sit. Cumque, saepe.
+            </div>
+            <div>Ad, alias aliquid architecto cum, dolor doloribus ducimus
+                enim expedita incidunt itaque laudantium libero molestias
+                mollitia obcaecati qui, quidem saepe voluptate. Deleniti magni
+                nulla numquam possimus voluptate. Asperiores, earum,
+                similique.
             </div>
         </div>
     );
