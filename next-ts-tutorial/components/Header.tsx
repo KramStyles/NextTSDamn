@@ -7,6 +7,8 @@ import { AiFillHome, AiFillInfoCircle } from "react-icons/ai";
 
 import MenuItem from "@/components/MenuItem";
 import Link from "next/link";
+import DarkModeSwitch from "@/components/DarkModeSwitch";
+
 const Header = () => {
   return (
     <div className="flex justify-between items-center p-3 mx-auto max-w-6xl ">
@@ -14,10 +16,15 @@ const Header = () => {
         <MenuItem title={"Home"} address={"/"} Icon={AiFillHome} />
         <MenuItem title={"About"} address={"/about"} Icon={AiFillInfoCircle} />
       </div>
-      <Link className="flex gap-1 items-center" href="/">
-          <span className="text-2xl font-bold bg-amber-500 py-1 px-2 rounded-lg">IMDB</span>
+      <div className="flex items-center gap-4">
+          <DarkModeSwitch />
+        <Link className="flex gap-1 items-center" href="/">
+          <span className="text-2xl font-bold bg-amber-500 py-1 px-2 rounded-lg">
+            IMDB
+          </span>
           <span className="text-xl hidden sm:inline">Clone</span>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };
