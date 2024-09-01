@@ -8,8 +8,8 @@ import NavItem from "@/components/NavItem";
 const NavBar = () => {
     return (
         <div className="flex dark:bg-amber-600 bg-amber-200 p-7 lg:text-lg justify-center gap-4">
-            <NavItem title="Trending" param="fetch-trending"/>
-            <NavItem title="Top Rated" param="fetch-top-rated"/>
+            <NavItem title="Trending" param="trending"/>
+            <NavItem title="Top Rated" param="top-rated"/>
         </div>
     );
 };
