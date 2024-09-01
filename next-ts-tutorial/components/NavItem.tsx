@@ -3,7 +3,7 @@
  * Filename: next-ts-tutorial/components/NavItem.tsx
  */
 
-"use client"
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -15,12 +15,14 @@ interface NavItemProps {
 }
 
 const NavItem: React.FC<NavItemProps> = ({ title, param }) => {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const genre = searchParams.get("genre");
-  const classes = "underline underline-offset-8 decoration-4 decoration-amber-500 rounded-lg"
-  console.log(`${searchParams}, ${param}`)
+  const classes =
+    "underline underline-offset-8 decoration-4 decoration-amber-500 dark:decoration-gray-500 rounded-lg";
   return (
-    <div className={`hover:text-amber-600 dark:hover:text-gray-800 ${genre === param ? "": ""}`}>
+    <div
+      className={`hover:text-amber-600 dark:hover:text-gray-800 ${genre === param ? classes : ""}`}
+    >
       <Link href={`/?genre=${param}`}>{title}</Link>
     </div>
   );
