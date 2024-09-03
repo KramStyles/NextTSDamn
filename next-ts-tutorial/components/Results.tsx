@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import {AiFillLike} from "react-icons/ai"
 
 export interface ResultProps {
   backdrop_path?: string;
@@ -27,7 +28,7 @@ export interface ResultProps {
 const Results = ({ result }: { result: ResultProps }) => {
   const url = "https://image.tmdb.org/t/p/original";
   return (
-    <div className="group">
+    <div className="group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg sm:border sm:border-slate-400 sm:m-2">
       <Link href={`/movie/${result.id}`}>
         <Image
           src={`${url}${result.backdrop_path || result.poster_path}`}
@@ -37,6 +38,11 @@ const Results = ({ result }: { result: ResultProps }) => {
           className="sm:rounded-t-lg group-hover:opacity-50 transition-opacity duration-300"
         />
       </Link>
+      <div className="p-2">
+        <p className="line-clamp-2 text-md my-3">{result.overview}</p>
+        <h2 className="text-lg font-bold truncate text-amber-600">{result.title || result.original_title}</h2>
+        <p className="flex gap-3 items-center">{result.release_date} <AiFillLike /> {result.vote_count} ({result.vote_average})</p>
+      </div>
     </div>
   );
 };
