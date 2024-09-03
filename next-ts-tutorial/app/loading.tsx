@@ -5,8 +5,8 @@
 
 const loading = () => {
     return (
-        <div>
-            <h1>loading. This page is loading</h1>
+        <div className="flex justify-center h-96">
+            <img src="spinner.svg" alt="loading..."/>
         </div>
     );
 };
