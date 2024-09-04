@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: ParamsProp }) {
           </p>
           <p className="flex items-center gap-1">
             <AiOutlineDollar /> <span className="font-semibold text-amber-600 dark:text-amber-400">Budget: </span>
-            {data.budget}
+            {(data.budget.toLocaleString("en-US"))}
           </p>
           <p className="flex items-center gap-1">
             <AiOutlineCalendar />

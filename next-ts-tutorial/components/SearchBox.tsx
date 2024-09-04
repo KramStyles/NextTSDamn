@@ -13,7 +13,7 @@ const SearchBox = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/search/${search}`);
-    // setSearch("")
+    setSearch("")
   };
   return (
     <form
