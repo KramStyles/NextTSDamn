@@ -2,15 +2,10 @@
  * Author: Kramstyles (USER)
  * Filename: next-ts-tutorial/components/Results.tsx
  */
-"use client"
 
 import Link from "next/link";
 import Image from "next/image";
 import { AiFillLike } from "react-icons/ai";
-
-import React, { createContext, useContext, useState, ReactNode } from "react";
-
-// Set up expected interface
 
 export interface ResultProps {
   backdrop_path?: string;
@@ -28,44 +23,15 @@ export interface ResultProps {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  tagline: string;
+  budget: number;
 }
-interface MovieContextType {
-  currentMovie: ResultProps | null,
-  setCurrentMovie: (movie: ResultProps | null) => void;
-}
-
-const MovieContext = createContext<MovieContextType>({
-  currentMovie: null, // Default state
-  setCurrentMovie: () => {} // Placeholder function
-});
-
-export function useMovie() {
-  return useContext(MovieContext);
-}
-
-export const MovieProducer = ({ children }: { children: ReactNode }) => {
-   const [currentMovie, setCurrentMovie] = useState<ResultProps | null>(null);
-
-  return (
-    <MovieContext.Provider value={{ currentMovie, setCurrentMovie }}>
-      {children}
-    </MovieContext.Provider>
-  );
-};
-
 
 const Results = ({ result }: { result: ResultProps }) => {
   const url = "https://image.tmdb.org/t/p/original";
-  const { setCurrentMovie } = useMovie();
-
-  // Update movie state
-  const handleClick = () => {
-    setCurrentMovie(result)
-  }
-
   return (
     <div className="group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg sm:border sm:border-slate-400 sm:m-2">
-      <Link href={`/movie/${result.id}`} onClick={handleClick}>
+      <Link href={`/movie/${result.id}`}>
         <Image
           src={`${url}${result.backdrop_path || result.poster_path}`}
           alt={`Official movie poster for ${result.title}`}
