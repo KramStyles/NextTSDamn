@@ -2,12 +2,15 @@
  * Author: Kramstyles (USER)
  * Filename: next-ts-tutorial/components/Results.tsx
  */
+"use client"
 
 import Link from "next/link";
 import Image from "next/image";
 import { AiFillLike } from "react-icons/ai";
 
-import { useMovie } from "@/context/MovieContext";
+import React, { createContext, useContext, useState, ReactNode } from "react";
+
+// Set up expected interface
 
 export interface ResultProps {
   backdrop_path?: string;
@@ -26,6 +29,30 @@ export interface ResultProps {
   vote_average: number;
   vote_count: number;
 }
+interface MovieContextType {
+  currentMovie: ResultProps | null,
+  setCurrentMovie: (movie: ResultProps | null) => void;
+}
+
+const MovieContext = createContext<MovieContextType>({
+  currentMovie: null, // Default state
+  setCurrentMovie: () => {} // Placeholder function
+});
+
+export function useMovie() {
+  return useContext(MovieContext);
+}
+
+export const MovieProducer = ({ children }: { children: ReactNode }) => {
+   const [currentMovie, setCurrentMovie] = useState<ResultProps | null>(null);
+
+  return (
+    <MovieContext.Provider value={{ currentMovie, setCurrentMovie }}>
+      {children}
+    </MovieContext.Provider>
+  );
+};
+
 
 const Results = ({ result }: { result: ResultProps }) => {
   const url = "https://image.tmdb.org/t/p/original";
