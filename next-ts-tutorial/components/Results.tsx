@@ -5,7 +5,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {AiFillLike} from "react-icons/ai"
+import { AiFillLike } from "react-icons/ai";
+
+import { useMovie } from "@/context/MovieContext";
 
 export interface ResultProps {
   backdrop_path?: string;
@@ -27,9 +29,16 @@ export interface ResultProps {
 
 const Results = ({ result }: { result: ResultProps }) => {
   const url = "https://image.tmdb.org/t/p/original";
+  const { setCurrentMovie } = useMovie();
+
+  // Update movie state
+  const handleClick = () => {
+    setCurrentMovie(result)
+  }
+
   return (
     <div className="group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg sm:border sm:border-slate-400 sm:m-2">
-      <Link href={`/movie/${result.id}`}>
+      <Link href={`/movie/${result.id}`} onClick={handleClick}>
         <Image
           src={`${url}${result.backdrop_path || result.poster_path}`}
           alt={`Official movie poster for ${result.title}`}
@@ -40,8 +49,13 @@ const Results = ({ result }: { result: ResultProps }) => {
       </Link>
       <div className="p-2">
         <p className="line-clamp-2 text-md my-3">{result.overview}</p>
-        <h2 className="text-lg font-bold truncate text-amber-600">{result.title || result.original_title}</h2>
-        <p className="flex gap-3 items-center">{result.release_date} <AiFillLike /> {result.vote_count} ({result.vote_average})</p>
+        <h2 className="text-lg font-bold truncate text-amber-600">
+          {result.title || result.original_title || "No Title"}
+        </h2>
+        <p className="flex gap-3 items-center">
+          {result.release_date} <AiFillLike /> {result.vote_count} (
+          {result.vote_average})
+        </p>
       </div>
     </div>
   );
