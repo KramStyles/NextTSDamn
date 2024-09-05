@@ -38,6 +38,7 @@ const Results = ({ result }: { result: ResultProps }) => {
           width={500}
           height={300}
           className="sm:rounded-t-lg group-hover:opacity-50 transition-opacity duration-300"
+          style={{ maxHeight: 300, objectFit: "cover" }}
         />
       </Link>
       <div className="p-2">
