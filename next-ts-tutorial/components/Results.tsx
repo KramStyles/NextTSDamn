@@ -5,7 +5,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {AiFillLike} from "react-icons/ai"
+import { AiFillLike } from "react-icons/ai";
 
 export interface ResultProps {
   backdrop_path?: string;
@@ -23,6 +23,8 @@ export interface ResultProps {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  tagline: string;
+  budget: number;
 }
 
 const Results = ({ result }: { result: ResultProps }) => {
@@ -36,12 +38,18 @@ const Results = ({ result }: { result: ResultProps }) => {
           width={500}
           height={300}
           className="sm:rounded-t-lg group-hover:opacity-50 transition-opacity duration-300"
+          style={{ maxHeight: 300, objectFit: "cover" }}
         />
       </Link>
       <div className="p-2">
         <p className="line-clamp-2 text-md my-3">{result.overview}</p>
-        <h2 className="text-lg font-bold truncate text-amber-600">{result.title || result.original_title}</h2>
-        <p className="flex gap-3 items-center">{result.release_date} <AiFillLike /> {result.vote_count} ({result.vote_average})</p>
+        <h2 className="text-lg font-bold truncate text-amber-600">
+          {result.title || result.original_title || "No Title"}
+        </h2>
+        <p className="flex gap-3 items-center">
+          {result.release_date} <AiFillLike /> {result.vote_count} (
+          {result.vote_average})
+        </p>
       </div>
     </div>
   );
