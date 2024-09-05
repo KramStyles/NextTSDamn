@@ -9,7 +9,7 @@ const RefreshPage = () => {
     revalidateTag("user_details");
     return (
         <div>
-            <h1>To refresh the 'user' tags and not HIT cache. This is the on-demand revalidation. </h1>
+            <h1>To refresh the <b>USER</b> tags and not HIT cache. This is the on-demand revalidation. </h1>
         </div>
     );
 };
