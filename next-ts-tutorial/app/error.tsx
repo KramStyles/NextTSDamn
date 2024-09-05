@@ -11,7 +11,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-const error: React.FC<ErrorProps> = ({ error, reset }) => {
+const Error: React.FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => {
     console.log(error);
   }, [error]);
@@ -26,4 +26,4 @@ const error: React.FC<ErrorProps> = ({ error, reset }) => {
   );
 };
 
-export default error;
+export default Error;
