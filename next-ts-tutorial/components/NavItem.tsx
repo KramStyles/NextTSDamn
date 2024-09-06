@@ -5,9 +5,8 @@
 
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 interface NavItemProps {
   title: string;
@@ -15,8 +14,12 @@ interface NavItemProps {
 }
 
 const NavItem: React.FC<NavItemProps> = ({ title, param }) => {
-  const searchParams = useSearchParams();
-  const genre = searchParams.get("genre");
+  const [genre, setGenre] = useState<string | null>(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setGenre(searchParams.get("genre"));
+  }, []);
   const classes =
     "underline underline-offset-8 decoration-4 decoration-amber-500 dark:decoration-gray-500 rounded-lg";
   return (

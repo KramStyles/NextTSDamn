@@ -22,13 +22,14 @@ const ServerPage = async () => {
     const users = await data.json()
 
     // Get local created api
-    const localData = await fetch("http://localhost:3000/api")
-    const localResponse = await localData.json()
+    // const localData = await fetch("/api")
+    // const localResponse = await localData.json()
 
     return (
         <div>
             <h1>Server Side Data Fetch Rendering:
-                ({localResponse.message})</h1>
+                {/*({localResponse.message})*/}
+            </h1>
             <br/>
             <ul>
                 {users && users?.map((user: any) =>
