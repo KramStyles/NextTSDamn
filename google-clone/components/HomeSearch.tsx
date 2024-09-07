@@ -16,7 +16,8 @@ export const HomeSearch = () => {
   };
 
   // Included this function for a separate event type
-  const buttonSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  // const buttonSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const buttonSubmit = () => {
     if (!input.trim()) return;
     router.push(`/search/web?searchTerm=${input}`);
   };
