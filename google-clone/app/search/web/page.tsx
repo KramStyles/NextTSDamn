@@ -4,20 +4,10 @@
  */
 
 import Link from "next/link";
+import WebSearchResult, { ResultProps } from "@/components/WebSearchResult";
 
 const API_KEY = process.env["NEXT_PUBLIC_GOOGLE_API_KEY"];
 const CONTEXT_KEY = process.env["NEXT_PUBLIC_GOOGLE_CONTEXT_KEY"];
-interface ResultProps {
-  kind: string;
-  title: string;
-  htmlTitle: string;
-  link: string;
-  displayLink: string;
-  snippet: string;
-  htmlSnippet: string;
-  formattedUrl: string;
-  htmlFormattedUrl: string;
-}
 
 interface searchParamsProps {
   searchParams: { searchTerm: string };
@@ -25,7 +15,6 @@ interface searchParamsProps {
 
 const page = async ({ searchParams: { searchTerm } }: searchParamsProps) => {
   const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}`;
-  console.log(url);
   const response = await fetch(url);
   // If an error occurs during fetch.
   if (!response.ok) throw new Error("Something went wrong");
@@ -48,10 +37,15 @@ const page = async ({ searchParams: { searchTerm } }: searchParamsProps) => {
   }
 
   return (
-    <div>
+    <div className="w-full mx-auto px-3 pb-24 sm:pl-[5%] md:pl-[14%] lg:pl-52">
+      <p className="text-gray-600 text-sm my-5">
+        About {data.searchInformation?.formattedTotalResults} results (
+        {data.searchInformation?.formattedSearchTime} seconds)
+      </p>
+
       {results &&
         results.map((result: ResultProps) => (
-          <h1 key={result.link}>{result.title}</h1>
+          <WebSearchResult key={result.link} result={result} />
         ))}
     </div>
   );
