@@ -25,7 +25,7 @@ const WebSearchResult = ({ result }: { result: ResultProps }) => {
         <Link href={result.link}>{Parser(result.htmlFormattedUrl)} </Link>
         <Link href={result.link} className="group-hover:underline decoration-blue-800 text-xl truncate font-medium text-blue-800">{result.title}</Link>
       </div>
-      <p className="text-gray-600">{Parser(result.htmlSnippet)}</p>
+      <p className="text-gray-600">{result.htmlSnippet && Parser(result.htmlSnippet)}</p>
     </div>
   );
 };

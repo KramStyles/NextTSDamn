@@ -3,6 +3,7 @@
  * Filename: components/SearchHeader.tsx
  */
 
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SearchBox from "@/components/SearchBox";
@@ -23,7 +24,9 @@ const SearchHeader = () => {
           />
         </Link>
         <div className="flex-1">
-          <SearchBox />
+          <Suspense fallback={null}>
+            <SearchBox />
+          </Suspense>
         </div>
       </div>
       <SearchHeaderOptions />
