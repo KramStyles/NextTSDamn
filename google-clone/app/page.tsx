@@ -10,8 +10,10 @@ export default function Home() {
         <Image
           alt="Google logo"
           src="/google-logo.png"
-          width={300}
+          width={"300"}
           height={100}
+          priority
+          style={{ width: "auto"}}
         />
         <HomeSearch />
       </div>
