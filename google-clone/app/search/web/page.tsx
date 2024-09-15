@@ -5,16 +5,21 @@
 
 import Link from "next/link";
 import WebSearchResult, { ResultProps } from "@/components/WebSearchResult";
+import PaginationButtons from "@/components/PaginationButtons";
 
 const API_KEY = process.env["NEXT_PUBLIC_GOOGLE_API_KEY"];
 const CONTEXT_KEY = process.env["NEXT_PUBLIC_GOOGLE_CONTEXT_KEY"];
 
 interface searchParamsProps {
-  searchParams: { searchTerm: string };
+  searchParams: { searchTerm: string; start: string };
 }
 
-const page = async ({ searchParams: { searchTerm } }: searchParamsProps) => {
-  const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}`;
+const page = async ({
+  searchParams: { searchTerm, start },
+}: searchParamsProps) => {
+  const startIndex = start || "1";
+  const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${searchTerm}&start=${startIndex}`;
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const response = await fetch(url);
   // If an error occurs during fetch.
   if (!response.ok) throw new Error("Something went wrong");
@@ -37,7 +42,7 @@ const page = async ({ searchParams: { searchTerm } }: searchParamsProps) => {
   }
 
   return (
-    <div className="w-full mx-auto px-3 pb-24 sm:pl-[5%] md:pl-[14%] lg:pl-52">
+    <div className="w-full mx-auto px-3 sm:pb-24 pb-40 sm:pl-[5%] md:pl-[14%] lg:pl-52">
       <p className="text-gray-600 text-sm my-5">
         About {data.searchInformation?.formattedTotalResults} results (
         {data.searchInformation?.formattedSearchTime} seconds)
@@ -47,6 +52,7 @@ const page = async ({ searchParams: { searchTerm } }: searchParamsProps) => {
         results.map((result: ResultProps) => (
           <WebSearchResult key={result.link} result={result} />
         ))}
+      <PaginationButtons />
     </div>
   );
 };
