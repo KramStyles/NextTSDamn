@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <h1>Hello Blog. God abeg</h1>
+      <h1>Hello Blog...</h1>
     </div>
   );
 }
