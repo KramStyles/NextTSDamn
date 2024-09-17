@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cx } from "@/utils";
 import { Montserrat, Raleway } from "next/font/google";
 import "./globals.css";
+import Index from "@/components/Header";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
           "font-raleway bg-light dark:bg-dark",
         )}
       >
+      <Index />
         {children}
       </body>
     </html>
