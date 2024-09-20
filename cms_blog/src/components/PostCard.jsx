@@ -5,9 +5,9 @@
 
 const PostCard = ({ post }) => {
   return (
-    <div>
-        {post.title}
-        {post.excerpt}
+    <div className="text-white border-b border-blue-500 mb-5">
+        <p className="font-semibold text-2xl">{post.title.rendered}</p>
+        {post.excerpt.rendered}
     </div>
   );
 };
