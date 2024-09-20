@@ -3,7 +3,17 @@
 * Filename: PostWidget.jsx
 */
 
-const PostWidget = () => {
+const URL= process.env["NEXT_PUBLIC_PACESETTER_URL"] + "posts?per_page=3";
+
+const PostWidget = async () => {
+    const response = await fetch(URL, {
+        next: {
+            tags: ["posts"],
+            revalidate: 6000
+        }
+    })
+    if (!response.ok) throw new Error("Something spoilt during post fetch.");
+    const posts = await response.json()
     return (
         <div>
             <h1>PostWidget</h1>

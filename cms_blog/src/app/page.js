@@ -3,7 +3,12 @@ import { Categories, PostCard, PostWidget } from "@/components";
 const URL = process.env["NEXT_PUBLIC_PACESETTER_URL"];
 
 export default async function Home() {
-  const response = await fetch(`${URL}posts`);
+  const response = await fetch(`${URL}posts?page=2`, {
+        next: {
+            revalidate: 6000, // Caches and removes cache after 5 Minutes.
+            tags: ["posts"],
+        }
+    });
   if (!response.ok) throw new Error("Something spoilt during post fetch.");
   const data = await response.json();
   return (
