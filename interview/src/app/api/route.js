@@ -73,8 +73,11 @@ export async function GET(request) {
         case "descending":
             sortedResult = sortByFilenameDesc(fetchedResult);
             break;
+        case "filename":
+            sortedResult = sortByCreateAt(fetchedResult);
+            break;
         default:
-            sortedResult = sortByCreateAt(fetchedResult)
+            sortedResult = fetchedResult;
     }
 
     return NextResponse.json({
