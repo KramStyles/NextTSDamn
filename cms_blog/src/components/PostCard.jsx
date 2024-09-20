@@ -2,12 +2,59 @@
  * Author: Kramstyles (USER)
  * Filename: PostCard.jsx
  */
+import moment from "moment";
+import Link from "next/link";
+import Image from "next/image";
+import Parser from "html-react-parser";
+import { CalenderSVG } from "@/icons";
 
 const PostCard = ({ post }) => {
+  const yoast = post.yoast_head_json;
+  const imgInfo = yoast.og_image[0];
   return (
-    <div className="text-white border-b border-blue-500 mb-5">
-        <p className="font-semibold text-2xl">{post.title.rendered}</p>
-        {post.excerpt.rendered}
+    <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
+      <div className="relative overflow-hidden shadow-md pb-80 mb-6">
+        <Image
+          src={imgInfo.url}
+          alt={post.title.rendered}
+          priority
+          width={imgInfo.width}
+          height={imgInfo.height}
+          className="object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+        />
+      </div>
+      <h1 className="transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-2xl font-semibold">
+        <Link href={`/post/${post.id}`}>{Parser(post.title.rendered)}</Link>
+      </h1>
+      <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
+        <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
+          <Image
+            src={imgInfo.url}
+            alt={"Author Featured"}
+            priority
+            height={30}
+            width={30}
+            className="align-middle rounded-full"
+          />
+          <p className="inline align-middle text-gray-700 ml-2 text-lg">
+            {yoast.author}
+          </p>
+        </div>
+        <div className="font-medium text-gray-700 flex justify-center items-center gap-x-2">
+          <CalenderSVG />{" "}
+          <span>{moment(post.date).format("MMM DD, YYYY")}</span>
+        </div>
+      </div>
+      <div className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
+        {Parser(post.excerpt.rendered)}
+      </div>
+      <div className="text-center">
+        <Link href={`/post/${post.id}`}>
+          <span className="transition duration-500 transform hover:bg-gray-700 bg-pink-600 text-lg font-medium rounded-full text-white px-8 py-4 cursor-pointer">
+            Continue Reading
+          </span>
+        </Link>
+      </div>
     </div>
   );
 };
