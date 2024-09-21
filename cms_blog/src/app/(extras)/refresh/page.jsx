@@ -6,7 +6,7 @@
 import {revalidateTag} from "next/cache";
 
 const RefreshPage = () => {
-    revalidateTag("posts")
+    revalidateTag("posts", "single_post")
     return (
         <div>
             <h1 className="text-4xl text-center text-white">On-Demand Validation</h1>
