@@ -2,36 +2,57 @@
  * Author: Kramstyles (USER)
  * Filename: Header.jsx
  */
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import Link from "next/link";
 
-const categories = [
-  { name: "React", slug: "react" },
-  { name: "Web Development", slug: "web-dev" },
-];
-const Header = () => {
-  return (
-    <div className="container mx-auto px-10 mb-8">
-      <div className="border-b w-full inline-block border-blue-400 py-8">
-        <div className="md:float-left block">
-          <Link href="/">
+// Function to shuffle the array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+const Header = async () => {
+    const URL =
+        process.env["NEXT_PUBLIC_PACESETTER_URL"] +
+        "categories?_fields=id,name&per_page=50";
+    const response = await fetch(URL, {
+        next: {
+            tags: ["posts"],
+            revalidate: 6000,
+        },
+    });
+    if (!response.ok)
+        throw new Error(`Something went wrong while fetching Categories. ${URL}`);
+
+
+    // Shuffle the array and pick the first 3 elements
+    const categories = await response.json();
+    const randomCategories = shuffleArray(categories).slice(0, 4)
+    return (
+        <div className="container mx-auto px-10 mb-8">
+            <div className="border-b w-full inline-block border-blue-400 py-8">
+                <div className="md:float-left block">
+                    <Link href="/">
             <span className="cursor-pointer font-bold text-4xl text-white">
               Karm First Blog
             </span>
-          </Link>
-        </div>
-        <div className="hidden md:float-left md:contents">
-          {categories.map((category, index) => (
-            <Link key={index} href={`/category/${category.slug}`}>
+                    </Link>
+                </div>
+                <div className="hidden md:float-left md:contents">
+                    {randomCategories.map((category, index) => (
+                        <Link key={index} href={`/category/${category.id}`}>
               <span className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
                 {category.name}
               </span>
-            </Link>
-          ))}
+                        </Link>
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Header;
