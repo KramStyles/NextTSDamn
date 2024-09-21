@@ -3,10 +3,20 @@
 * Filename: page.jsx
 */
 
+import {Author, CommentForm, Comments, PostDetail, SideBar} from "@/components";
+
 const Post = () => {
     return (
-        <div>
-            <h1>[id]</h1>
+        <div className="container mx-auto px-10 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div className="col-span-1 lg:col-span-8">
+                    <PostDetail />
+                    <Author />
+                    <CommentForm />
+                    <Comments />
+                </div>
+                <SideBar />
+            </div>
         </div>
     );
 };

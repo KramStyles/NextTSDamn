@@ -1,4 +1,4 @@
-import { Categories, PostCard, PostWidget } from "@/components";
+import { PostCard, SideBar } from "@/components";
 
 const URL = process.env["NEXT_PUBLIC_PACESETTER_URL"];
 
@@ -19,13 +19,7 @@ export default async function Home() {
             <PostCard post={post} key={post.id} />
           ))}
         </div>
-        <div className="col-span-1 lg:col-span-4">
-          <div className="lg:sticky relative top-10">
-            <PostWidget />
-            <PostWidget category={1331}/>
-            <Categories />
-          </div>
-        </div>
+        <SideBar />
       </div>
     </div>
   );
