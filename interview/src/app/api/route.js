@@ -1,40 +1,16 @@
-import {NextResponse} from "next/server";
 import csv from "csv-parser"
 import fs from "fs"
 import path from "path"
+
+import {NextResponse} from "next/server";
+
+import {sortByCreateAt, sortByFilenameAsc, sortByFilenameDesc} from "@/utils";
 
 export async function GET(request) {
     const filePath = path.resolve("src/public/data.csv");
     const result = [];
     let results = {}
     let sortedResult = {}
-
-    const sortByFilenameAsc = (result) => {
-        // Sort the object by values
-        return Object.fromEntries(
-            Object.entries(result).sort(([, valueA], [, valueB]) => {
-                return valueA.localeCompare(valueB); // Sorting by string comparison
-            })
-        );
-    }
-
-    const sortByFilenameDesc = (result) => {
-        // Sort the object by values in descending order
-        return Object.fromEntries(
-            Object.entries(result).sort(([, valueA], [, valueB]) => {
-                return valueB.localeCompare(valueA); // Reverse the order by switching valueB and valueA
-            })
-        );
-    }
-
-    const sortByCreateAt = (result) => {
-        // Sort the object by created at
-        return Object.fromEntries(
-            Object.entries(result).sort(([keyA], [keyB]) => {
-                return new Date(keyA) - new Date(keyB); // Sorting by date (since the keys are datetime strings)
-            })
-        );
-    }
 
     // We read the file into a variable
     const readCSV = () => {
@@ -73,17 +49,16 @@ export async function GET(request) {
         case "descending":
             sortedResult = sortByFilenameDesc(fetchedResult);
             break;
-        case "filename":
+        case "created_at":
             sortedResult = sortByCreateAt(fetchedResult);
             break;
         default:
             sortedResult = fetchedResult;
     }
 
+    console.log(sortedResult)
+
     return NextResponse.json({
-        // Get document from directory
-        // Load document data into a variable
-        // Sort based on specified option
         sortedResult
     })
 }

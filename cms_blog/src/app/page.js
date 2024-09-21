@@ -20,8 +20,9 @@ export default async function Home() {
           ))}
         </div>
         <div className="col-span-1 lg:col-span-4">
-          <div className="lg:sticky relative top-8">
+          <div className="lg:sticky relative top-10">
             <PostWidget />
+            <PostWidget category={1331}/>
             <Categories />
           </div>
         </div>
